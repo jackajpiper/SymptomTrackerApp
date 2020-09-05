@@ -11,7 +11,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.jackpiper.symptomtracker.Symptom.SymptomsActivity;
+import com.example.jackpiper.symptomtracker.Symgestant.SymgestantsListActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openSymptoms(View view) {
-        Intent intent = new Intent(this, SymptomsActivity.class);
+        Intent intent = new Intent(this, SymgestantsListActivity.class);
         startActivity(intent);
     }
 

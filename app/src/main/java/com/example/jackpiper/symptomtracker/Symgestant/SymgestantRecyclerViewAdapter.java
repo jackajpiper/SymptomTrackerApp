@@ -1,11 +1,16 @@
-package com.example.jackpiper.symptomtracker;
+package com.example.jackpiper.symptomtracker.Symgestant;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.jackpiper.symptomtracker.R;
 
 import java.util.List;
 
@@ -16,7 +21,7 @@ public class SymgestantRecyclerViewAdapter extends RecyclerView.Adapter<Symgesta
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    public SymgestantRecyclerViewAdapter(Context context, List<String> data) {
+    SymgestantRecyclerViewAdapter(Context context, List<String> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -31,8 +36,8 @@ public class SymgestantRecyclerViewAdapter extends RecyclerView.Adapter<Symgesta
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String animal = mData.get(position);
-        holder.title.setText(animal);
+        String title = mData.get(position);
+        holder.title.setText(title);
     }
 
     // total number of rows
@@ -45,10 +50,16 @@ public class SymgestantRecyclerViewAdapter extends RecyclerView.Adapter<Symgesta
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView title;
+        LinearLayout layout;
 
         ViewHolder(View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.textView);
+            title = itemView.findViewById(R.id.title);
+            layout = itemView.findViewById(R.id.row_layout);
+
+            int[] colors = {Color.parseColor("#ffffff"), Color.parseColor("#ff0000")};
+            GradientDrawable gd = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, colors);
+            layout.setBackground(gd);
             itemView.setOnClickListener(this);
         }
 
@@ -59,12 +70,12 @@ public class SymgestantRecyclerViewAdapter extends RecyclerView.Adapter<Symgesta
     }
 
     // convenience method for getting data at click position
-    String getItem(int position) {
-        return mData.get(position);
+    String getItem(int id) {
+        return mData.get(id);
     }
 
     // allows clicks events to be caught
-    public void setClickListener(ItemClickListener itemClickListener) {
+    void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
